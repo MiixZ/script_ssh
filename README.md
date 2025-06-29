@@ -7,7 +7,7 @@ ssh <ip-target>
 ```
 
 every time the computer boots, without hard-coding the target IP in the script.
-The IP (or hostname) is stored in a persistent environment variable and the script is triggered by a Scheduled Task, which is more reliable than the classic Startup folder. An ip can commonly be (on a remote server): 'user@ip'. It has 8 simple steps
+The IP (or hostname) is stored in a persistent environment variable and the script is triggered by a Scheduled Task, which is more reliable than the classic Startup folder. An ip can commonly be (on a remote server): 'user@ip'. It has 7 simple steps
 
 ## 0: Prerequisites
 
@@ -28,7 +28,7 @@ The IP (or hostname) is stored in a persistent environment variable and the scri
   - Variable value: Any host u need (user@ip)
 - OK → OK → Close Settings.
 
-### 2: PowerShell method (persistent)
+### By PowerShell method (persistent)
 
 ```powershell
 [Environment]::SetEnvironmentVariable(
@@ -44,7 +44,7 @@ Log out or open a new terminal and verify:
 PS> echo $Env:SSH_TARGET
 ```
 
-## 3: Create a new PowerShell Script
+## 2: Create a new PowerShell Script
 
 Create a new script whenever you want (for example C:\Scripts\Connect-SSH.ps1)
 
@@ -61,7 +61,7 @@ Start-Process pwsh -ArgumentList @(
 )
 ```
 
-## 4: Allow Scripts to Run
+## 3: Allow Scripts to Run
 
 If your system blocks scripts, set a less restrictive policy once:
 
@@ -71,7 +71,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 **RemoteSigned** is generally safe for local scripts.
 
-## 5: Create the scheduled task
+## 4: Create the scheduled task
 
 - Press Win + S, search for Task Scheduled, right-click --> Run as administrator.
 - In the right pane choose **Create Task**... (not Basic Task)
@@ -89,12 +89,12 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 - Click OK, enter your password if prompted.
 
-## 6: Test It
+## 5: Test It
 
 - Right-click the task → Run → A new PowerShell window should appear and immediately try to connect via ssh <target>.
 - Reboot or sign out/in to confirm the automatic launch.
 
-## 7: Troubleshooting
+## 6: Troubleshooting
 
 | Symptom                                       | Fix                                                                                                  |
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
@@ -103,7 +103,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 | Task never fires                              | Check the History tab in Task Scheduler. Make sure the trigger is At log on and the task is Enabled. |
 | “Scripts disabled on this system”             | Adjust Execution Policy (Section 4).                                                                 |
 
-## 8: (optional) Remove/Disable
+## 7: (optional) Remove/Disable
 
 - To stop auto-launching, simply disable or delete the task in Task Scheduler.
 - Remove the environment variable with:
