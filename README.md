@@ -113,3 +113,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 Enjoy hands-free SSH logins every time Windows 11 starts!
+
+## Recommended
+
+If you are interested and like to customize your own shell in Windows, I invite you to check my 'personal' branch where I use WindowsTerminal instead of PS, with a customizable profile that I have previously built. For more information, you can also visit this [public guide](https://freshman.tech/windows-terminal-guide/).
